@@ -1,0 +1,130 @@
+ #include <iostream>
+#include <string>
+using namespace std;
+
+class Hotel
+{
+private:                 // 🔒 Data Hiding (Encapsulation)
+    int roomNumber;
+    string customerName;
+    string customerAddress;
+    string customerPhone;
+    bool isBooked;
+
+public:
+    // Constructor
+    Hotel()
+    {
+        isBooked = false;
+    }
+
+    // Book a Room
+    void bookRoom()
+    {
+        if (isBooked)
+        {
+            cout << "\nRoom is already booked!\n";
+            return;
+        }
+
+        cout << "Enter Room Number: ";
+        cin >> roomNumber;
+        cin.ignore();
+
+        cout << "Enter Customer Name: ";
+        getline(cin, customerName);
+
+        cout << "Enter Customer Address: ";
+        getline(cin, customerAddress);
+
+        cout << "Enter Customer Phone: ";
+        cin >> customerPhone;
+
+        isBooked = true;
+
+        cout << "\nRoom Booked Successfully!\n";
+    }
+
+    // Search Customer
+    void searchCustomer()
+    {
+        if (isBooked)
+        {
+            cout << "\nRoom No: " << roomNumber << endl;
+            cout << "Customer: " << customerName << endl;
+            cout << "Address: " << customerAddress << endl;
+            cout << "Phone: " << customerPhone << endl;
+        }
+        else
+        {
+            cout << "\nRoom is Available.\n";
+        }
+    }
+
+    // Display Room Status
+    void displayRoom()
+    {
+        if (isBooked)
+            cout << "Room " << roomNumber << " - Booked\n";
+        else
+            cout << "Room - Available\n";
+    }
+
+    // Check Out
+    void checkOut()
+    {
+        if (!isBooked)
+        {
+            cout << "\nRoom is already empty!\n";
+            return;
+        }
+
+        cout << "\nRoom " << roomNumber << " checked out successfully!\n";
+        cout << "Total Bill: $500\n";
+
+        isBooked = false;
+    }
+};
+
+int main()
+{
+    Hotel h;              // 🎯 Object creation
+    int choice;
+
+    cout << "========== HOTEL MANAGEMENT SYSTEM ==========\n";
+
+    do
+    {
+        cout << "\n1. Book a Room";
+        cout << "\n2. Search Customer";
+        cout << "\n3. Display Room Status";
+        cout << "\n4. Check Out";
+        cout << "\n5. Exit";
+        cout << "\nEnter your choice: ";
+        cin >> choice;
+
+        switch (choice)
+        {
+        case 1:
+            h.bookRoom();
+            break;
+        case 2:
+            h.searchCustomer();
+            break;
+        case 3:
+            h.displayRoom();
+            break;
+        case 4:
+            h.checkOut();
+            break;
+        case 5:
+            cout << "\nThank you for using Hotel Management System!\n";
+            break;
+        default:
+            cout << "\nInvalid choice!\n";
+        }
+
+    } while (choice != 5);
+
+    return 0;
+}
