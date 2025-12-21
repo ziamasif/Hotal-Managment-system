@@ -4,7 +4,7 @@ using namespace std;
 
 class Hotel
 {
-private:                 // 🔒 Data Hiding (Encapsulation)
+private:
     int roomNumber;
     string customerName;
     string customerAddress;
@@ -12,13 +12,11 @@ private:                 // 🔒 Data Hiding (Encapsulation)
     bool isBooked;
 
 public:
-    // Constructor
     Hotel()
     {
         isBooked = false;
     }
 
-    // Book a Room
     void bookRoom()
     {
         if (isBooked)
@@ -45,7 +43,6 @@ public:
         cout << "\nRoom Booked Successfully!\n";
     }
 
-    // Search Customer
     void searchCustomer()
     {
         if (isBooked)
@@ -61,7 +58,6 @@ public:
         }
     }
 
-    // Display Room Status
     void displayRoom()
     {
         if (isBooked)
@@ -70,7 +66,6 @@ public:
             cout << "Room - Available\n";
     }
 
-    // Check Out
     void checkOut()
     {
         if (!isBooked)
@@ -88,7 +83,7 @@ public:
 
 int main()
 {
-    Hotel h;              // 🎯 Object creation
+    Hotel h; 
     int choice;
 
     cout << "========== HOTEL MANAGEMENT SYSTEM ==========\n";
@@ -127,4 +122,5 @@ int main()
     } while (choice != 5);
 
     return 0;
+
 }
