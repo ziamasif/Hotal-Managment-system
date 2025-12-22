@@ -1,127 +1,166 @@
- #include <iostream>
-#include <string>
+#include <iostream>
 using namespace std;
 
-class Hotel
+class HotelManagement
 {
 private:
-    int roomNumber;
-    string customerName;
-    string customerAddress;
-    string customerPhone;
-    bool isBooked;
+    int quant, choice;
+
+    // Quantity
+    int Qrooms, Qpasta, Qburger, Qshake, Qchicken;
+
+    // Sold
+    int Srooms, Spasta, Sburger, Sshake, Schicken;
+
+    // Total Collection
+    int Total_rooms, Total_pasta, Total_burger, Total_shake, Total_chicken;
 
 public:
-    Hotel()
+    HotelManagement()
     {
-        isBooked = false;
+        Qrooms = Qpasta = Qburger = Qshake = Qchicken = 0;
+        Srooms = Spasta = Sburger = Sshake = Schicken = 0;
+        Total_rooms = Total_pasta = Total_burger = Total_shake = Total_chicken = 0;
     }
 
-    void bookRoom()
+    void setQuantity()
     {
-        if (isBooked)
+        cout << "\n\t Quantity of items we have:";
+        cout << "\n\t Rooms Available: ";
+        cin >> Qrooms;
+        cout << "\n\t Quantity of Pasta: ";
+        cin >> Qpasta;
+        cout << "\n\t Quantity of Burger: ";
+        cin >> Qburger;
+        cout << "\n\t Quantity of Shake: ";
+        cin >> Qshake;
+        cout << "\n\t Quantity of Chicken Roll: ";
+        cin >> Qchicken;
+    }
+
+    void menu()
+    {
+        while (true)
         {
-            cout << "\nRoom is already booked!\n";
-            return;
+            cout << "\n\n\t\t Please select from the menu options";
+            cout << "\n1) Rooms";
+            cout << "\n2) Pasta";
+            cout << "\n3) Burger";
+            cout << "\n4) Shake";
+            cout << "\n5) Chicken Roll";
+            cout << "\n6) Sales and Collection";
+            cout << "\n7) Exit";
+            cout << "\n\nEnter your choice: ";
+            cin >> choice;
+
+            switch (choice)
+            {
+            case 1: bookRooms(); break;
+            case 2: orderPasta(); break;
+            case 3: orderBurger(); break;
+            case 4: orderShake(); break;
+            case 5: orderChicken(); break;
+            case 6: showSales(); break;
+            case 7: exit(0);
+            default:
+                cout << "\nInvalid choice!";
+            }
         }
-
-        cout << "Enter Room Number: ";
-        cin >> roomNumber;
-        cin.ignore();
-
-        cout << "Enter Customer Name: ";
-        getline(cin, customerName);
-
-        cout << "Enter Customer Address: ";
-        getline(cin, customerAddress);
-
-        cout << "Enter Customer Phone: ";
-        cin >> customerPhone;
-
-        isBooked = true;
-
-        cout << "\nRoom Booked Successfully!\n";
     }
 
-    void searchCustomer()
+    void bookRooms()
     {
-        if (isBooked)
+        cout << "\nEnter number of rooms: ";
+        cin >> quant;
+
+        if (Qrooms - Srooms >= quant)
         {
-            cout << "\nRoom No: " << roomNumber << endl;
-            cout << "Customer: " << customerName << endl;
-            cout << "Address: " << customerAddress << endl;
-            cout << "Phone: " << customerPhone << endl;
+            Srooms += quant;
+            Total_rooms += quant * 25000;
+            cout << "\n" << quant << " Rooms allotted!";
         }
         else
-        {
-            cout << "\nRoom is Available.\n";
-        }
+            cout << "\nOnly " << Qrooms - Srooms << " rooms available!";
     }
 
-    void displayRoom()
+    void orderPasta()
     {
-        if (isBooked)
-            cout << "Room " << roomNumber << " - Booked\n";
+        cout << "\nEnter pasta quantity: ";
+        cin >> quant;
+
+        if (Qpasta - Spasta >= quant)
+        {
+            Spasta += quant;
+            Total_pasta += quant * 250;
+            cout << "\n" << quant << " Pasta ordered!";
+        }
         else
-            cout << "Room - Available\n";
+            cout << "\nOnly " << Qpasta - Spasta << " pasta available!";
     }
 
-    void checkOut()
+    void orderBurger()
     {
-        if (!isBooked)
+        cout << "\nEnter burger quantity: ";
+        cin >> quant;
+
+        if (Qburger - Sburger >= quant)
         {
-            cout << "\nRoom is already empty!\n";
-            return;
+            Sburger += quant;
+            Total_burger += quant * 350;
+            cout << "\n" << quant << " Burger ordered!";
         }
+        else
+            cout << "\nOnly " << Qburger - Sburger << " burger available!";
+    }
 
-        cout << "\nRoom " << roomNumber << " checked out successfully!\n";
-        cout << "Total Bill: $500\n";
+    void orderShake()
+    {
+        cout << "\nEnter shake quantity: ";
+        cin >> quant;
 
-        isBooked = false;
+        if (Qshake - Sshake >= quant)
+        {
+            Sshake += quant;
+            Total_shake += quant * 450;
+            cout << "\n" << quant << " Shake ordered!";
+        }
+        else
+            cout << "\nOnly " << Qshake - Sshake << " shake available!";
+    }
+
+    void orderChicken()
+    {
+        cout << "\nEnter chicken roll quantity: ";
+        cin >> quant;
+
+        if (Qchicken - Schicken >= quant)
+        {
+            Schicken += quant;
+            Total_chicken += quant * 550;
+            cout << "\n" << quant << " Chicken roll ordered!";
+        }
+        else
+            cout << "\nOnly " << Qchicken - Schicken << " chicken roll available!";
+    }
+
+    void showSales()
+    {
+        cout << "\n\n========= SALES REPORT =========";
+        cout << "\nRooms Sold: " << Srooms << " | Collection: " << Total_rooms;
+        cout << "\nPasta Sold: " << Spasta << " | Collection: " << Total_pasta;
+        cout << "\nBurger Sold: " << Sburger << " | Collection: " << Total_burger;
+        cout << "\nShake Sold: " << Sshake << " | Collection: " << Total_shake;
+        cout << "\nChicken Sold: " << Schicken << " | Collection: " << Total_chicken;
+
+        cout << "\n\nTotal Collection: "
+             << Total_rooms + Total_pasta + Total_burger + Total_shake + Total_chicken;
     }
 };
 
 int main()
 {
-    Hotel h; 
-    int choice;
-
-    cout << "========== HOTEL MANAGEMENT SYSTEM ==========\n";
-
-    do
-    {
-        cout << "\n1. Book a Room";
-        cout << "\n2. Search Customer";
-        cout << "\n3. Display Room Status";
-        cout << "\n4. Check Out";
-        cout << "\n5. Exit";
-        cout << "\nEnter your choice: ";
-        cin >> choice;
-
-        switch (choice)
-        {
-        case 1:
-            h.bookRoom();
-            break;
-        case 2:
-            h.searchCustomer();
-            break;
-        case 3:
-            h.displayRoom();
-            break;
-        case 4:
-            h.checkOut();
-            break;
-        case 5:
-            cout << "\nThank you for using Hotel Management System!\n";
-            break;
-        default:
-            cout << "\nInvalid choice!\n";
-        }
-
-    } while (choice != 5);
-
+    HotelManagement h;
+    h.setQuantity();
+    h.menu();
     return 0;
-
 }
-
