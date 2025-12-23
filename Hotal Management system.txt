@@ -6,13 +6,10 @@ class HotelManagement
 private:
     int quant, choice;
 
-    // Quantity
     int Qrooms, Qpasta, Qburger, Qshake, Qchicken;
 
-    // Sold
     int Srooms, Spasta, Sburger, Sshake, Schicken;
 
-    // Total Collection
     int Total_rooms, Total_pasta, Total_burger, Total_shake, Total_chicken;
 
 public:
@@ -164,3 +161,4 @@ int main()
     h.menu();
     return 0;
 }
+
